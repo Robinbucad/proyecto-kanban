@@ -1,0 +1,22 @@
+
+.sub-header{
+    display: flex;
+    justify-content: space-between;
+    background-color: red;
+    align-items: center;
+    padding: 20px 25px;
+}
+
+.update-info-subheader{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 50px;
+}
+
+.input-filter{
+    padding: 0.5rem 1rem;
+    width: 22rem;
+    border-radius: 8px;
+    border-color: lightgray;
+}
