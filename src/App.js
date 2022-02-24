@@ -7,10 +7,12 @@ import CardToDo from './components/Card-To-Do';
 function App() {
   return (
     <div className="App">
-      <CreateCard></CreateCard>
+      <header>Aqui va el header de Juan</header>
       <SubHeader></SubHeader>
       <main className='card-container'>
       <CardToDo></CardToDo>
+      <p>Aqui va card progress</p>
+      <p>Aqui va card Done</p>
       </main>
     </div>
   );
