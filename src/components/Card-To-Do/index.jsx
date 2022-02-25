@@ -29,23 +29,18 @@ function CardToDo() {
     let minutes = fecha.getMinutes()
     let seconds = fecha.getSeconds()
 
-
-    const [saveSec, updateSec] = useState()
-    
-    console.log(list)
-    
-   
-    localStorage.setItem('seconds', seconds)
-    let takeSeconds = localStorage.getItem('seconds')
-
-
+    let taskCard = {
+        task:tareaText,
+        id:id,
+        day:day,
+        month:month,
+        year:year,
+        hour:hour,
+        minutes:minutes,
+        seconds:seconds
+    }
     
     const handleAddTask = e => {
-        
-            let taskCard = {
-                task:tareaText,
-                id:id
-            }
             updateId(id +1)
             updateList(list => [...list, taskCard])     
         
@@ -77,7 +72,7 @@ function CardToDo() {
 
     return (
         <Card title='To do' handleAdd={handleAdd} handleTextTask={handleTextTask} handleAddTask={handleAddTask}
-              tarea={tarea} list={list} id={id}  opacity={opacity} day={day} month={month} year={year} hour={hour} minutes={minutes} saveSec={saveSec}>
+              tarea={tarea} list={list} id={id}  opacity={opacity} day={day} month={month} year={year} hour={hour} minutes={minutes} seconds={seconds}>
         </Card>
     )
 }

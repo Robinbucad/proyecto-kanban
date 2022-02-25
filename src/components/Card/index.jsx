@@ -30,7 +30,7 @@ function Card(props) {
                     <h4 className='title-task'>{e.task}</h4>
                     <div className='dated-list'>
                         <p id='id'>#{e.id}</p>
-                        <p className='time-creation'>{`created on ${props.day}/${props.month}/${props.year} ${props.hour}:${props.minutes}:${props.saveSec}`}</p>
+                        <p className='time-creation'>{`created on ${e.day}/${e.month}/${e.year} ${e.hour}:${e.minutes}:${e.seconds}`}</p>
                         <div>
                             <button className='btn__header__add' onClick={props.handleRemove}>-</button>
                         </div>
