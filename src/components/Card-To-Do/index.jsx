@@ -1,51 +1,89 @@
+import { useEffect } from 'react'
 import { useState } from 'react'
-import './style.css'
+import Card from '../Card'
 
-function CardToDo(){
 
-    /**Funcion que enseña la opcion de añadir tareas */
+const listFromLocal = JSON.parse(localStorage.getItem('toDoTask')) || []
 
+function CardToDo() {
+
+    /**Variable que guarda el Area Text, se usa para mostrar y esconder  */
     const [tarea, updateTarea] = useState([])
+
+    /**Esto añade una clase al boton add para darle opacidad si no hay nada escrito */
+    const [opacity, updateOpacity] = useState('opacity')
+
+    /**Varibale que guarda el contenido del texto */
+    const [tareaText, updateTareaText] = useState([])
+    /**Varibale que hace un array de la lista */
+
+    let fecha = new Date()
+    let month = fecha.getMonth()
+    let day = fecha.getDate()
+    let year = fecha.getFullYear()
+    let hour = fecha.getHours()
+    let minutes = fecha.getMinutes()
+    let seconds = fecha.getSeconds()
+
+
+    const [saveSec, updateSec] = useState()
+    const [list, updateList] = useState(listFromLocal)
     
-    const handleAdd = () => {
-        updateTarea(true)
-        if(tarea === true){
-            updateTarea(false)
-            console.log('oculta')
-        }else {   
-            console.log('enseña el texto')
-        }     
+
+    localStorage.setItem('task', list)
+    
+
+  
+    
+   
+    localStorage.setItem('seconds', seconds)
+    let takeSeconds = localStorage.getItem('seconds')
+
+
+
+    const handleAddTask = e => {
+
+        {
+            tareaText === '' ? console.log('escribe algo') :
+            list.push(tareaText)
+            updateList(list)
+            updateTareaText('')
+            localStorage.setItem('toDoTask',JSON.stringify(list))
+        }
+
     }
 
-    return(
-        <article className='card'>
-            <header className='header__card'>
-                <div className='left__header__card'>
-                    <p>1</p>
-                    <h3>To do</h3>
-                </div>
 
-                <button className='btn__header__add' onClick={handleAdd}>+</button>
-            </header>
-            <section className='card-list'>
+    const handleTextTask = e => {
+        updateTareaText(e.target.value)
+        updateOpacity('newOpacity')
+    }
 
-                {tarea === true ?  <div className='add-tarea'>
-                   <textarea rows='4'className='text-area'></textarea>
-                    <div className='btn-divs'>
-                        <button className='btn-tarea-add'>Add</button>
-                        <button className='btn-tarea-cancel'>Cancel</button>
-                    </div>
-                </div> : ''}
 
-                <div className='tarea'>
-                    <h4 className='title-task'>Title Tarea</h4>
-                    <p>Fecha creacion</p>
 
-                </div>
 
-            </section>
-        </article>
+    const handleAdd = () => {
+
+        updateTarea(true)
+        if (tarea === true) {
+            updateTarea(false)
+            updateTareaText('')
+            console.log('oculta')
+        } else {
+            console.log('enseña el texto')
+        }
+    }
+
+
+    console.log(tareaText)
+
+
+    return (
+        <Card title='To do' handleAdd={handleAdd} handleTextTask={handleTextTask} handleAddTask={handleAddTask}
+              tarea={tarea} list = {list} opacity={opacity} day={day} month={month} year={year} hour={hour} minutes={minutes} saveSec={saveSec}>
+        </Card>
     )
 }
 
 export default CardToDo
+
