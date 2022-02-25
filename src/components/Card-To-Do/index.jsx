@@ -1,6 +1,9 @@
+import { useEffect } from 'react'
 import { useState } from 'react'
-import './style.css'
-import CardList from '../Card-List-Done'
+import Card from '../Card'
+
+
+const listFromLocal = JSON.parse(localStorage.getItem('toDoTask')) || []
 
 function CardToDo() {
 
@@ -13,8 +16,6 @@ function CardToDo() {
     /**Varibale que guarda el contenido del texto */
     const [tareaText, updateTareaText] = useState([])
     /**Varibale que hace un array de la lista */
-    const [list, updateList] = useState([])
-
 
     let fecha = new Date()
     let month = fecha.getMonth()
@@ -25,12 +26,18 @@ function CardToDo() {
     let seconds = fecha.getSeconds()
 
 
-    let secondsSave = localStorage.setItem('seconds', seconds)
-    let minutesSave = localStorage.setItem('minutes', minutes)
-    let hoursSave = localStorage.setItem('hours', hour)
+    const [saveSec, updateSec] = useState()
+    const [list, updateList] = useState(listFromLocal)
+    
 
+    localStorage.setItem('task', list)
+    
+
+  
+    
+   
+    localStorage.setItem('seconds', seconds)
     let takeSeconds = localStorage.getItem('seconds')
-
 
 
 
@@ -41,6 +48,7 @@ function CardToDo() {
             list.push(tareaText)
             updateList(list)
             updateTareaText('')
+            localStorage.setItem('toDoTask',JSON.stringify(list))
         }
 
     }
@@ -55,6 +63,7 @@ function CardToDo() {
 
 
     const handleAdd = () => {
+
         updateTarea(true)
         if (tarea === true) {
             updateTarea(false)
@@ -70,44 +79,11 @@ function CardToDo() {
 
 
     return (
-        <article className='card'>
-            <header className='header__card'>
-                <div className='left__header__card'>
-                    <p>1</p>
-                    <h3>To do</h3>
-                </div>
-
-                <button className='btn__header__add' onClick={handleAdd}>+</button>
-            </header>
-            <section className='card-list'>
-
-                {tarea === true ? <div className='add-tarea'>
-                    <textarea rows='4' className='text-area' onChange={handleTextTask}></textarea>
-                    <div className='btn-divs'>
-                        <button className='btn-tarea-add' id={opacity} onClick={handleAddTask}>Add</button>
-                        <button className='btn-tarea-cancel'>Cancel</button>
-                    </div>
-                </div> : ''}
-
-                {list.map((e, i) => <div key={i} className='tarea'>
-                    <h4 className='title-task'>{e}</h4>
-                    <p className='time-creation'>{`created on ${day}/${month}/${year} ${hour}:${minutes}:${takeSeconds}`}</p>
-                </div>)}
-
-            </section>
-        </article>
+        <Card title='To do' handleAdd={handleAdd} handleTextTask={handleTextTask} handleAddTask={handleAddTask}
+              tarea={tarea} list = {list} opacity={opacity} day={day} month={month} year={year} hour={hour} minutes={minutes} saveSec={saveSec}>
+        </Card>
     )
 }
 
 export default CardToDo
 
-/**
- * {list.map((e, i) => <div key={i} className='tarea'>
-                    <h4 className='title-task'>{e}</h4>
-                    <p>Fecha creacion</p>
-                </div>)}
- */
-
-/**
- * updateTareaText(e.target.value)
- */

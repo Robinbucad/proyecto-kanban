@@ -60,8 +60,9 @@
 .left__header__card{
     display: flex;
     justify-content: space-between;
-    width: 5rem;
+    width: 7rem;
     align-items: center;
+    justify-content: flex-start;
 }
 
 
