@@ -7,9 +7,6 @@ function SubHeader(){
     let month = fecha.toLocaleString('default', {month:'short'})
     let day = fecha.getDate()
 
-
-  
-
  
 
     return(

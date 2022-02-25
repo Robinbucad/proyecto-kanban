@@ -19,10 +19,10 @@ function Card(props) {
             <section className='card-list'>
 
                 {props.tarea === true ? <div className='add-tarea'>
-                    <textarea rows='4' className='text-area' onChange={props.handleTextTask}></textarea>
+                    <textarea value={props.value} rows='4' className='text-area' onChange={props.handleTextTask}></textarea>
                     <div className='btn-divs'>
                         <button className='btn-tarea-add' id={props.opacity} onClick={props.handleAddTask}>Add</button>
-                        <button className='btn-tarea-cancel'>Cancel</button>
+                        <button className='btn-tarea-cancel' onClick={props.handleCancel}>Cancel</button>
                     </div>
                 </div> : ''}
 

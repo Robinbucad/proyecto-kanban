@@ -39,11 +39,13 @@ function CardToDo() {
         minutes:minutes,
         seconds:seconds
     }
-    
+
+    console.log(taskCard.task === '' ? console.log('hola') : console.log('adios'))
+
     const handleAddTask = e => {
             updateId(id +1)
-            updateList(list => [...list, taskCard])     
-        
+            updateList(list => [...list, taskCard])  
+            updateTareaText('')   
     }
    
     const handleTextTask = e => {
@@ -66,13 +68,17 @@ function CardToDo() {
         }
     }
 
+    const handleCancel = () => {
+        updateTarea(false)
+    }
 
    
 
 
     return (
         <Card title='To do' handleAdd={handleAdd} handleTextTask={handleTextTask} handleAddTask={handleAddTask}
-              tarea={tarea} list={list} id={id}  opacity={opacity} day={day} month={month} year={year} hour={hour} minutes={minutes} seconds={seconds}>
+              tarea={tarea} list={list} id={id}  opacity={opacity} day={day} month={month}
+              value={tareaText} year={year} hour={hour} minutes={minutes} seconds={seconds} handleCancel={handleCancel}>
         </Card>
     )
 }
