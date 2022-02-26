@@ -1,8 +1,10 @@
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import Card from '../Card'
+import { FilterContext } from '../../provider/filter.context'
 
 const listFromLocal = JSON.parse(localStorage.getItem('toDoTask')) || []
+
 
 function CardToDo() {
 
@@ -18,8 +20,9 @@ function CardToDo() {
     const [list, updateList] = useState(listFromLocal)
     const [id,updateId] = useState(1)
     localStorage.setItem('toDoTask', JSON.stringify(list))
+    
+    const [filter, updateFilter] = useContext(FilterContext)
 
-  
 
     let fecha = new Date()
     let month = fecha.getMonth()
@@ -29,23 +32,24 @@ function CardToDo() {
     let minutes = fecha.getMinutes()
     let seconds = fecha.getSeconds()
 
-    let taskCard = {
-        task:tareaText,
-        id:id,
-        day:day,
-        month:month,
-        year:year,
-        hour:hour,
-        minutes:minutes,
-        seconds:seconds
-    }
+    
 
-    console.log(taskCard.task === '' ? console.log('hola') : console.log('adios'))
 
     const handleAddTask = e => {
+        let taskCard = {
+            task:tareaText,
+            id:id,
+            day:day,
+            month:month,
+            year:year,
+            hour:hour,
+            minutes:minutes,
+            seconds:seconds
+        }
             updateId(id +1)
-            updateList(list => [...list, taskCard])  
-            updateTareaText('')   
+            updateList(list => [...list, taskCard]) 
+            updateFilter(list => [...list,taskCard]) 
+            updateTareaText('') 
     }
    
     const handleTextTask = e => {
@@ -72,12 +76,12 @@ function CardToDo() {
         updateTarea(false)
     }
 
-   
+    
 
 
     return (
         <Card title='To do' handleAdd={handleAdd} handleTextTask={handleTextTask} handleAddTask={handleAddTask}
-              tarea={tarea} list={list} id={id}  opacity={opacity} day={day} month={month}
+              tarea={tarea} list={filter} id={id}  opacity={opacity} day={day} month={month}
               value={tareaText} year={year} hour={hour} minutes={minutes} seconds={seconds} handleCancel={handleCancel}>
         </Card>
     )

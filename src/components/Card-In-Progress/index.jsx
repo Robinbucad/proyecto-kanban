@@ -1,10 +1,13 @@
 
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useState } from 'react'
+import Draggable from 'react-draggable';
+import { FilterProgessContext } from '../../provider/progress.context';
 import Card from '../Card';
 
 
 const listFromLocal = JSON.parse(localStorage.getItem('inProgressTask')) || []
+
 
 function CardIndProgress() {
 
@@ -21,9 +24,10 @@ function CardIndProgress() {
       const [list, updateList] = useState(listFromLocal)
       const [id,updateId] = useState(1)
       localStorage.setItem('inProgressTask', JSON.stringify(list))
-  
-    
-  
+
+      const [filterProgres,updateProgress] = useContext(FilterProgessContext)
+        
+
       let fecha = new Date()
       let month = fecha.getMonth()
       let day = fecha.getDate()
@@ -43,15 +47,19 @@ function CardIndProgress() {
           seconds:seconds
       }
   
-      console.log(taskCard.task === '' ? console.log('hola') : console.log('adios'))
   
       const handleAddTask = e => {
               updateId(id +1)
-              updateList(list => [...list, taskCard])     
+              updateList(list => [...list, taskCard])  
+              updateProgress(list => [...list, taskCard]) 
              updateTareaText('')
+            
       }
- 
-     
+
+
+      
+
+
       const handleTextTask = e => {
           updateTareaText(e.target.value)
           updateOpacity('newOpacity')
@@ -78,10 +86,12 @@ function CardIndProgress() {
       
   
       return (
+        
           <Card title='In progress' handleAdd={handleAdd} handleTextTask={handleTextTask} handleAddTask={handleAddTask}
-                tarea={tarea} list={list} id={id}  opacity={opacity} day={day} month={month}
+                tarea={tarea} list={filterProgres} id={id}  opacity={opacity} day={day} month={month}
                  value={tareaText} year={year} hour={hour} minutes={minutes} seconds={seconds} handleCancel={handleCancel}>
           </Card>
+     
       )
     
 }

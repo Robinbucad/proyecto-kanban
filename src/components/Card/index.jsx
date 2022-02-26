@@ -27,10 +27,13 @@ function Card(props) {
                 </div> : ''}
 
                 {props.list.map((e, i) => <div key={i} className='tarea'>
+
                     {props.title === 'To do' || 'In progress' ? <div className='taskIconPending'> <div className='innerPending'></div></div> : 
                     <div className='taskIconDone'><div className='innerDone'></div></div>}
 
-                    <h4 className='title-task'>{e.task}</h4>
+                    <div>
+                   <h4 className='title-task'>{e.task}</h4>
+                    </div>
                     <div className='dated-list'>
                         <p id='id'>#{e.id}</p>
                         <p className='time-creation'>{`created on ${e.day}/${e.month}/${e.year} ${e.hour}:${e.minutes}:${e.seconds}`}</p>
@@ -39,6 +42,7 @@ function Card(props) {
                         </div>
                     </div>
                 </div>)}
+
                
 
             </section>
