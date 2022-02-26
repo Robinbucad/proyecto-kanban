@@ -83,7 +83,6 @@ function CardIndProgress() {
       const handleCancel = () => {
           updateTarea(false)
       }
-  
       
   
       return (
