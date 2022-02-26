@@ -27,6 +27,9 @@ function Card(props) {
                 </div> : ''}
 
                 {props.list.map((e, i) => <div key={i} className='tarea'>
+                    {props.title === 'To do' || 'In progress' ? <div className='taskIconPending'> <div className='innerPending'></div></div> : 
+                    <div className='taskIconDone'><div className='innerDone'></div></div>}
+
                     <h4 className='title-task'>{e.task}</h4>
                     <div className='dated-list'>
                         <p id='id'>#{e.id}</p>
