@@ -74,10 +74,21 @@ function Done() {
             console.log('enseña el texto')
         }
     }
-    const handleRemove =() =>{
-        localStorage.removeItem('done')
-
+    const handleRemove = id =>{
+       const removeArr = list.filter(d => d.id !== id.target.value)
+       const length = removeArr.length
+       removeArr.splice(0,length)
+       updateList(removeArr)
     }
+
+
+    const handleRemoveOne = e => {
+        const removeArrOne = list.filter( d => d.id !== e.target.value)
+        let counter = 0
+        removeArrOne.splice(counter, 1)
+        updateList(removeArrOne)
+    }
+
     // const key_id= id
     // const handleRemoveItem = JSON.parse(localStorage.getItem("key_name")) || [];           
     //         $.each(item_detail, function(index, obj){
@@ -105,6 +116,8 @@ function Done() {
                 <p>1</p>
                 <h3>{title}</h3>
             </div>
+            
+            <button className='btn__header__clearAll' onClick={handleRemove}>clear All</button>
 
             <button className='btn__header__add' onClick={handleAdd}>+</button>
 
@@ -128,7 +141,7 @@ function Done() {
                         <h4 className='title-task'>{e.task}</h4>
                     </div>
                     <div>
-                        <button className='btn__header__remove' onClick={handleRemove}><img className='trash__btn' src="https://img.icons8.com/metro/26/000000/trash.png" /></button>
+                        <button className='btn__header__remove' onClick={handleRemoveOne}><img className='trash__btn' src="https://img.icons8.com/metro/26/000000/trash.png" /></button>
                     </div>
 
                 </div>
