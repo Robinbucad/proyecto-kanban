@@ -7,7 +7,7 @@ import Card from '../Card';
 
 
 const listFromLocal = JSON.parse(localStorage.getItem('inProgressTask')) || []
-
+const idFromLocal = JSON.parse(localStorage.getItem('id'))
 
 
 function CardIndProgress() {
@@ -24,9 +24,9 @@ function CardIndProgress() {
 
     const [list, updateList] = useState(listFromLocal)
 
-    const [id, updateId] = useState(1)
-    localStorage.setItem('id', id)
+    const [id, updateId] = useState(idFromLocal)
 
+    console.log(idFromLocal)
 
     
     localStorage.setItem('inProgressTask', JSON.stringify(list))
