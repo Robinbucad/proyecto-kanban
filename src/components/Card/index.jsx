@@ -1,4 +1,4 @@
-
+import { FiTrash2 } from 'react-icons'
 import './style.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -23,29 +23,33 @@ function Card(props) {
                 {props.tarea === true ? <div className='add-tarea'>
                     <textarea value={props.value} rows='4' className='text-area' onChange={props.handleTextTask}></textarea>
                     <div className='btn-divs'>
-                    <button type="button"  id={props.opacity} class="btn btn-success btn-lg  custom"  onClick={props.handleAddTask}  disabled={props.enable}>Add</button>
+                        <button type="button" id={props.opacity} class="btn btn-success btn-lg  custom" onClick={props.handleAddTask} disabled={props.enable}>Add</button>
                         <button className='btn-tarea-cancel' onClick={props.handleCancel}>Cancel</button>
                     </div>
                 </div> : ''}
 
                 {props.list.map((e, i) => <div key={i} className='tarea'>
-                <div className='title-div-task'>
-                    {props.title === 'To do' || 'In progress' ? <div className='taskIconPending'> <div className='innerPending'></div></div> : 
-                    <div className='taskIconDone'><div className='innerDone'></div></div>}
+                    <div className='header-task-info'>
+                        <div className='title-div-task'>
+                            {props.title === 'To do' || 'In progress' ? <div className='taskIconPending'> <div className='innerPending'></div></div> :
+                                <div className='taskIconDone'><div className='innerDone'></div></div>}
 
-                    
-                   <h4 className='title-task'>{e.task}</h4>
+                            <h4 className='title-task'>{e.task}</h4>
+                        </div>
+                        <div>
+                            <button className='btn__header__remove' onClick={props.handleRemove}><img className='trash__btn' src="https://img.icons8.com/metro/26/000000/trash.png" /></button>
+                        </div>
+
                     </div>
                     <div className='dated-list'>
-                        <p id='id'>#{e.id}</p>
-                        <p className='time-creation'>{`created on ${e.day}/${e.month}/${e.year} ${e.hour}:${e.minutes}:${e.seconds}`}</p>
-                        <div>
-                            <button className='btn__header__add' value={e.id} onClick={props.handleRemove}>-</button>
+                        <div className='id-info-card'>
+                            <p id='id'>#{e.id}</p>
+                            <p className='time-creation'>{`created on ${e.day}/${e.month}/${e.year} ${e.hour}:${e.minutes}:${e.seconds}`}</p>
                         </div>
                     </div>
                 </div>)}
 
-               
+
 
             </section>
         </article>
@@ -68,6 +72,6 @@ export default Card
                 </div>)}
  */
 
-                /**
-                 *  <button className='btn-tarea-add' id={props.opacity} onClick={props.handleAddTask}>Add</button>
-                 */
+/**
+ *  <button className='btn-tarea-add' id={props.opacity} onClick={props.handleAddTask}>Add</button>
+ */
