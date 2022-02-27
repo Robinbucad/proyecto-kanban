@@ -27,7 +27,7 @@ function CardToDo() {
   
     
     const [id,updateId] = useState(listId)
-    console.log(listId)
+    
 
 
     localStorage.setItem('id', id)
@@ -87,13 +87,13 @@ function CardToDo() {
     const handleCancel = () => {
         updateTarea(false)
     }
-
     
+
 
 
     return (
         <Card cardId='cardToDo' title='To do' handleAdd={handleAdd} handleTextTask={handleTextTask} handleAddTask={handleAddTask}
-              tarea={tarea} list={filter} id={id}  opacity={opacity} day={day} month={month} enable={enable}
+              tarea={tarea} list={filter} id={id}  opacity={opacity} day={day} month={month} enable={enable} 
               value={tareaText} year={year} hour={hour} minutes={minutes} seconds={seconds} handleCancel={handleCancel} >
         </Card>
     )

@@ -40,7 +40,7 @@ function Card(props) {
                         <p id='id'>#{e.id}</p>
                         <p className='time-creation'>{`created on ${e.day}/${e.month}/${e.year} ${e.hour}:${e.minutes}:${e.seconds}`}</p>
                         <div>
-                            <button className='btn__header__add' onClick={props.handleRemove}>-</button>
+                            <button className='btn__header__add' value={e.id} onClick={props.handleRemove}>-</button>
                         </div>
                     </div>
                 </div>)}
