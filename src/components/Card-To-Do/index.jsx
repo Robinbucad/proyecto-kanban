@@ -4,7 +4,7 @@ import Card from '../Card'
 import { FilterContext } from '../../provider/filter.context'
 
 const listFromLocal = JSON.parse(localStorage.getItem('toDoTask')) || []
-
+const listId = JSON.parse(localStorage.getItem('id')) || 1
 
 function CardToDo() {
 
@@ -18,11 +18,19 @@ function CardToDo() {
     const [tareaText, updateTareaText] = useState([])
     
     const [list, updateList] = useState(listFromLocal)
-    const [id,updateId] = useState(1)
+    
     localStorage.setItem('toDoTask', JSON.stringify(list))
     
     const [filter, updateFilter] = useContext(FilterContext)
+    const [enable, setEnable] = useState(true)
+   
+  
+    
+    const [id,updateId] = useState(listId)
+    console.log(listId)
 
+
+    localStorage.setItem('id', id)
 
     let fecha = new Date()
     let month = fecha.getMonth()
@@ -32,29 +40,33 @@ function CardToDo() {
     let minutes = fecha.getMinutes()
     let seconds = fecha.getSeconds()
 
-    
+    let taskCard = {
+        task:tareaText,
+        id:id,
+        day:day,
+        month:month,
+        year:year,
+        hour:hour,
+        minutes:minutes,
+        seconds:seconds
+    }
 
 
     const handleAddTask = e => {
-        let taskCard = {
-            task:tareaText,
-            id:id,
-            day:day,
-            month:month,
-            year:year,
-            hour:hour,
-            minutes:minutes,
-            seconds:seconds
-        }
-            updateId(id +1)
+       
+            updateId(id + 1)
             updateList(list => [...list, taskCard]) 
             updateFilter(list => [...list,taskCard]) 
             updateTareaText('') 
+            updateTarea(false)
+            setEnable(true)
     }
    
     const handleTextTask = e => {
         updateTareaText(e.target.value)
         updateOpacity('newOpacity')
+        setEnable(false)
+      
     }
 
 
@@ -80,9 +92,9 @@ function CardToDo() {
 
 
     return (
-        <Card title='To do' handleAdd={handleAdd} handleTextTask={handleTextTask} handleAddTask={handleAddTask}
-              tarea={tarea} list={filter} id={id}  opacity={opacity} day={day} month={month}
-              value={tareaText} year={year} hour={hour} minutes={minutes} seconds={seconds} handleCancel={handleCancel}>
+        <Card cardId='cardToDo' title='To do' handleAdd={handleAdd} handleTextTask={handleTextTask} handleAddTask={handleAddTask}
+              tarea={tarea} list={filter} id={id}  opacity={opacity} day={day} month={month} enable={enable}
+              value={tareaText} year={year} hour={hour} minutes={minutes} seconds={seconds} handleCancel={handleCancel} >
         </Card>
     )
 }
