@@ -1,4 +1,4 @@
-
+import {FiTrash2} from 'react-icons'
 import './style.css'
 
 function Card(props) {
@@ -38,7 +38,7 @@ function Card(props) {
                         <p id='id'>#{e.id}</p>
                         <p className='time-creation'>{`created on ${e.day}/${e.month}/${e.year} ${e.hour}:${e.minutes}:${e.seconds}`}</p>
                         <div>
-                            <button className='btn__header__add' onClick={props.handleRemove}>-</button>
+                            <button className='btn__header__remove' onClick={props.handleRemove}><img className='trash__btn' src="https://img.icons8.com/metro/26/000000/trash.png"/></button>
                         </div>
                     </div>
                 </div>)}

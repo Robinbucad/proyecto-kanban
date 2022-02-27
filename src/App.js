@@ -7,6 +7,7 @@ import Header from './components/Header';
 import CardIndProgress from './components/Card-In-Progress';
 import ProviderFilter from './provider/filter.provider';
 import ProgressFilter from './provider/progress.provider'
+import Done from './components/Card-Done';
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
         <main className='card-container'>
           <CardToDo></CardToDo>
           <CardIndProgress></CardIndProgress>
-          <p>Aqui va card Done</p>
+          <Done></Done>
         </main>
       </ProviderFilter>
     </ProgressFilter>

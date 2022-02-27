@@ -5,6 +5,7 @@
     height: 80vh;
     border-radius: 5px;
     border: 1px solid rgba(27,31,35,0.15);
+    box-shadow: 8px 6px 15px 1px rgb(0 0 0 / 79%);
 }
 
 .dated-list {
@@ -95,10 +96,18 @@
 
 .tarea {
     border: 1px solid rgba(27,31,35,0.15);
+    box-shadow: 5px 3px 15px -1px rgb(0 0 0 / 79%);
     padding: 0.5rem;
     width: 98%;
     border-radius: 4px;
     background-color: white;
+    
+}
+.tarea:hover{
+    transform: translateX(-10px);
+    box-shadow: 5px 3px 15px -1px rgb(0 0 0 / 79%);
+
+
 }
 
 .time-creation{
@@ -139,4 +148,26 @@
     height: 5px;
     width: 5px;
     margin-top: 5px;
+}
+.btn__header__clearAll{
+    background:none;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    font-size: small;
+
+
+}
+.btn__header__remove{
+    background:none;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+
+}
+.trash__btn{
+    height: 15px;
+    width: 16px;
+    margin-left: 58px;
+    
 }
