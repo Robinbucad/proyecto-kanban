@@ -1,5 +1,7 @@
 import {FiTrash2} from 'react-icons'
 import './style.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 
 function Card(props) {
 
@@ -21,17 +23,17 @@ function Card(props) {
                 {props.tarea === true ? <div className='add-tarea'>
                     <textarea value={props.value} rows='4' className='text-area' onChange={props.handleTextTask}></textarea>
                     <div className='btn-divs'>
-                        <button className='btn-tarea-add' id={props.opacity} onClick={props.handleAddTask}>Add</button>
+                    <button type="button"  id={props.opacity} class="btn btn-success btn-lg  custom"  onClick={props.handleAddTask}  disabled={props.enable}>Add</button>
                         <button className='btn-tarea-cancel' onClick={props.handleCancel}>Cancel</button>
                     </div>
                 </div> : ''}
 
                 {props.list.map((e, i) => <div key={i} className='tarea'>
-
+                <div className='title-div-task'>
                     {props.title === 'To do' || 'In progress' ? <div className='taskIconPending'> <div className='innerPending'></div></div> : 
                     <div className='taskIconDone'><div className='innerDone'></div></div>}
 
-                    <div>
+                    
                    <h4 className='title-task'>{e.task}</h4>
                     </div>
                     <div className='dated-list'>
@@ -65,3 +67,7 @@ export default Card
                     </div>
                 </div>)}
  */
+
+                /**
+                 *  <button className='btn-tarea-add' id={props.opacity} onClick={props.handleAddTask}>Add</button>
+                 */
