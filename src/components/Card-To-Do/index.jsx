@@ -2,9 +2,11 @@ import { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import Card from '../Card'
 import { FilterContext } from '../../provider/filter.context'
+import { IdContext } from '../../provider/id.context'
+
 
 const listFromLocal = JSON.parse(localStorage.getItem('toDoTask')) || []
-const listId = JSON.parse(localStorage.getItem('id')) || 1
+
 
 function CardToDo() {
 
@@ -17,20 +19,24 @@ function CardToDo() {
     /**Varibale que guarda el contenido del texto */
     const [tareaText, updateTareaText] = useState([])
     
+    /**Variable que actualiza la lista de tareas, se inicializa con las lista guardada en el local para que al reiniciar no se borre */
     const [list, updateList] = useState(listFromLocal)
     
+
+    /**Almaceno la lista en el local storage */
     localStorage.setItem('toDoTask', JSON.stringify(list))
     
+    /**Use el contexto del filtro para poder filtrar la lista To-DO */
     const [filter, updateFilter] = useContext(FilterContext)
+
+    /**Variable que activa y desactiva el boton de añadir tarea */
     const [enable, setEnable] = useState(true)
-   
-  
     
-    const [id,updateId] = useState(listId)
- 
+    /**Variable que actualiza el id del producto, guardo el Id en el local y lo inicializo en el contexto para que al reiniciar la pagina no se reinicie el Id a 1 */
+    const [idLocal, updateIdLocal] = useContext(IdContext)
 
-
-    localStorage.setItem('id', id)
+    /** Creo el localStorage del id */
+    localStorage.setItem('id', idLocal)
 
     let fecha = new Date()
     let month = fecha.getMonth()
@@ -42,7 +48,7 @@ function CardToDo() {
 
     let taskCard = {
         task:tareaText,
-        id:id,
+        id:idLocal,
         day:day,
         month:month,
         year:year,
@@ -54,7 +60,7 @@ function CardToDo() {
 
     const handleAddTask = e => {
        
-            updateId(id + 1)
+            updateIdLocal(idLocal + 1)
             updateList(list => [...list, taskCard]) 
             updateFilter(list => [...list,taskCard]) 
             updateTareaText('') 
@@ -92,8 +98,8 @@ function CardToDo() {
 
 
     return (
-        <Card cardId='cardToDo' title='To do' handleAdd={handleAdd} handleTextTask={handleTextTask} handleAddTask={handleAddTask}
-              tarea={tarea} list={filter} id={id}  opacity={opacity} day={day} month={month} enable={enable} 
+        <Card dragTable='To-do-list' indexDrag={idLocal} cardId='cardToDo' title='To do' handleAdd={handleAdd} handleTextTask={handleTextTask} handleAddTask={handleAddTask}
+              tarea={tarea} list={filter} value={idLocal}   opacity={opacity} day={day} month={month} enable={enable} 
               value={tareaText} year={year} hour={hour} minutes={minutes} seconds={seconds} handleCancel={handleCancel} >
         </Card>
     )
@@ -101,13 +107,3 @@ function CardToDo() {
 
 export default CardToDo
 
-/**
- * const [list, updateList] = useState(listFromLocal)
-    
-    
-const listFromLocal = JSON.parse(localStorage.getItem('toDoTask')) || []
-
-    localStorage.setItem('task', list)
-    
- * 
- */

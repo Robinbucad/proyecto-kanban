@@ -1,6 +1,8 @@
 import { FiTrash2 } from 'react-icons'
 import './style.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { Droppable } from 'react-beautiful-dnd'
+import { Draggable } from 'react-beautiful-dnd'
 
 
 function Card(props) {
@@ -8,51 +10,74 @@ function Card(props) {
 
     return (
 
-        <article className='card'>
-            <header className='header__card'>
-                <div className='left__header__card'>
-                    <p>1</p>
-                    <h3>{props.title}</h3>
-                </div>
+        <Droppable droppableId={props.dragTable}>
 
-                <button className='btn__header__add' onClick={props.handleAdd}>+</button>
+            {
+                (provided, i) => (
+                    <article className='card' ref={provided.innerRef} {...provided.droppableProps} key={i.toString()} >
+                        <header className='header__card'>
+                            <div className='left__header__card'>
+                                <p>1</p>
+                                <h3>{props.title}</h3>
+                            </div>
 
-            </header>
-            <section className='card-list'>
+                            <button className='btn__header__add' onClick={props.handleAdd}>+</button>
 
-                {props.tarea === true ? <div className='add-tarea'>
-                    <textarea value={props.value} rows='4' className='text-area' onChange={props.handleTextTask}></textarea>
-                    <div className='btn-divs'>
-                        <button type="button" id={props.opacity} class="btn btn-success btn-lg  custom" onClick={props.handleAddTask} disabled={props.enable}>Add</button>
-                        <button className='btn-tarea-cancel' onClick={props.handleCancel}>Cancel</button>
-                    </div>
-                </div> : ''}
+                        </header>
+                        <section className='card-list'>
 
-                {props.list.map((e, i) => <div key={i} className='tarea'>
-                    <div className='header-task-info'>
-                        <div className='title-div-task'>
-                            {props.title === 'To do' || 'In progress' ? <div className='taskIconPending'> <div className='innerPending'></div></div> :
-                                <div className='taskIconDone'><div className='innerDone'></div></div>}
+                            {props.tarea === true ? <div className='add-tarea'>
+                                <textarea value={props.value} rows='4' className='text-area' onChange={props.handleTextTask}></textarea>
+                                <div className='btn-divs'>
+                                    <button type="button" id={props.opacity} class="btn btn-success btn-lg  custom" onClick={props.handleAddTask} disabled={props.enable}>Add</button>
+                                    <button className='btn-tarea-cancel' onClick={props.handleCancel}>Cancel</button>
+                                </div>
+                            </div> : ''}
+                    
+                            {props.list.map((e, i) => (
+                            
+                            <Draggable draggableId={`${e.id} + id`} key={e.id} index={i}>
 
-                            <h4 className='title-task'>{e.task}</h4>
-                        </div>
-                        <div>
-                            <button className='btn__header__remove' onClick={props.handleRemove}><img className='trash__btn' src="https://img.icons8.com/metro/26/000000/trash.png" /></button>
-                        </div>
+                                {
+                                    (provided) => (
+                                        <div key={i} className='tarea' {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                                <div className='header-task-info'>
+                                    <div className='title-div-task'>
+                                        {props.title === 'To do' || 'In progress' ? <div className='taskIconPending'> <div className='innerPending'></div></div> :
+                                            <div className='taskIconDone'><div className='innerDone'></div></div>}
 
-                    </div>
-                    <div className='dated-list'>
-                        <div className='id-info-card'>
-                            <p id='id'>#{e.id}</p>
-                            <p className='time-creation'>{`created on ${e.day}/${e.month}/${e.year} ${e.hour}:${e.minutes}:${e.seconds}`}</p>
-                        </div>
-                    </div>
-                </div>)}
+                                        <h4 className='title-task'>{e.task}</h4>
+                                    </div>
+                                    <div>
+                                        <button className='btn__header__remove' onClick={props.handleRemove}><img className='trash__btn' src="https://img.icons8.com/metro/26/000000/trash.png" /></button>
+                                    </div>
+
+                                </div>
+                                <div className='dated-list'>
+                                    <div className='id-info-card'>
+                                        <p id='id'>#{e.id}</p>
+                                        <p className='time-creation'>{`created on ${e.day}/${e.month}/${e.year} ${e.hour}:${e.minutes}:${e.seconds}`}</p>
+                                    </div>
+                                </div>
+                                
+                            </div> 
+                                    )
+                                }
+
+                            
+                            </Draggable>
+                            ))}
 
 
 
-            </section>
-        </article>
+                        </section>
+                        {provided.placeholder}
+                    </article>
+                )
+            }
+
+
+        </Droppable>
 
     )
 }

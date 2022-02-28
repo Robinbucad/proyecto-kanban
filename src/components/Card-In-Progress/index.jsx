@@ -2,13 +2,12 @@
 import { useContext, useEffect } from 'react';
 import { useState } from 'react'
 import Draggable from 'react-draggable';
+import { IdContext } from '../../provider/id.context';
 import { FilterProgessContext } from '../../provider/progress.context';
 import Card from '../Card';
 
 
 const listFromLocal = JSON.parse(localStorage.getItem('inProgressTask')) || []
-const idFromLocal = JSON.parse(localStorage.getItem('id'))
-
 
 function CardIndProgress() {
 
@@ -24,9 +23,9 @@ function CardIndProgress() {
 
     const [list, updateList] = useState(listFromLocal)
 
-    const [id, updateId] = useState(idFromLocal)
+    const [idLocal, updateIdLocal] = useContext(IdContext)
 
-    console.log(idFromLocal)
+    
 
     
     localStorage.setItem('inProgressTask', JSON.stringify(list))
@@ -46,7 +45,7 @@ function CardIndProgress() {
 
     let taskCard = {
         task: tareaText,
-        id: id,
+        id: idLocal,
         day: day,
         month: month,
         year: year,
@@ -57,7 +56,7 @@ function CardIndProgress() {
 
 
     const handleAddTask = e => {
-        updateId(id + 1)
+        updateIdLocal(idLocal + 1)
         updateList(list => [...list, taskCard])
         updateProgress(list => [...list, taskCard])
         updateTareaText('')
@@ -97,8 +96,8 @@ function CardIndProgress() {
 
     return (
 
-        <Card cardId='cardProgress' title='In progress' handleAdd={handleAdd} handleTextTask={handleTextTask} handleAddTask={handleAddTask}
-            tarea={tarea} list={filterProgres} id={id} opacity={opacity} day={day} month={month}  enable={enable}
+        <Card dragTable='inProg-list'  indexDrag={idLocal} cardId='cardProgress' title='In progress' handleAdd={handleAdd} handleTextTask={handleTextTask} handleAddTask={handleAddTask}
+            tarea={tarea} list={filterProgres} id={idLocal} opacity={opacity} day={day} month={month}  enable={enable}
             value={tareaText} year={year} hour={hour} minutes={minutes} seconds={seconds} handleCancel={handleCancel}>
         </Card>
 
