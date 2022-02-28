@@ -3,10 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ProgressFilter from './provider/progress.provider'
+import ProviderFilter from './provider/filter.provider'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ProviderFilter>
+      <ProgressFilter>
+        <App />
+      </ProgressFilter>
+    </ProviderFilter>
   </React.StrictMode>,
   document.getElementById('root')
 );

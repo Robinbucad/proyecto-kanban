@@ -12,15 +12,24 @@ import IdProvider from './provider/id.provider';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { useContext, useState } from 'react';
 import DateProvider from './provider/date.provider';
+import { FilterContext } from './provider/filter.context';
+import { FilterProgessContext } from './provider/progress.context';
+import { act } from '@testing-library/react';
 
-const listFromLocal = JSON.parse(localStorage.getItem('toDoTask')) || []
-const listProgressFromLocal = JSON.parse(localStorage.getItem('inProgressTask')) || []
+
+
 
 
 function App() {
 
-  const [toDo, updateToDo] = useState(listFromLocal)
-  const [inProg, updateInProg] = useState(listProgressFromLocal)
+  const listFromLocal = JSON.parse(localStorage.getItem('toDoTask')) || []
+  const listProgressFromLocal = JSON.parse(localStorage.getItem('inProgressTask')) || []
+
+  //const [toDo, updateToDo] = useState(listFromLocal)
+ // const [inProg, updateInProg] = useState(listProgressFromLocal)
+
+  const [filter, updateFilter] = useContext(FilterContext)
+  const [filterProg, updateFilterProg] = useContext(FilterProgessContext)
 
   
 
@@ -36,13 +45,14 @@ function App() {
     }
 
     let add,
-      active = toDo,
-      inProgList = inProg;
+      active = filter,
+      inProgList = filterProg;
 
 
     if (source.droppableId === 'To-do-list') {
       add = active[source.index]
       active.splice(source.index, 1)
+      
     } else {
       add = inProgList[source.index]
       inProgList.splice(source.index, 1)
@@ -51,13 +61,15 @@ function App() {
     if (destination.droppableId === 'To-do-list') {
       active.splice(destination.index, 0, add)
 
+
     } else {
       inProgList.splice(destination.index, 0, add)
 
     }
-
-    updateToDo(active)
-    updateInProg(inProgList)
+    
+   
+    updateFilter(active)
+    updateFilterProg(inProgList)
     console.log(active)
     console.log(inProgList)
 
@@ -65,23 +77,19 @@ function App() {
 
   return (
 
-<DateProvider>
-    <DragDropContext onDragEnd={OnDragEnd}>
-      <ProgressFilter>
-        <ProviderFilter>
-          <IdProvider>
-            <Header></Header>
-            <SubHeader></SubHeader>
-            <main className='card-container'>
-              <CardToDo></CardToDo>
-              <CardIndProgress></CardIndProgress>
-              <Done></Done>
-            </main>
-          </IdProvider>
-        </ProviderFilter>
-      </ProgressFilter>
-    </DragDropContext>
-  </DateProvider>
+    <DateProvider>
+      <DragDropContext onDragEnd={OnDragEnd}>
+        <IdProvider>
+          <Header></Header>
+          <SubHeader></SubHeader>
+          <main className='card-container'>
+            <CardToDo></CardToDo>
+            <CardIndProgress></CardIndProgress>
+            <Done></Done>
+          </main>
+        </IdProvider>
+      </DragDropContext>
+    </DateProvider>
 
 
   );

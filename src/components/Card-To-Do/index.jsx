@@ -114,7 +114,7 @@ function CardToDo() {
 
     return (
         <Card dragTable='To-do-list' indexDrag={idLocal} cardId='cardToDo' title='To do' handleAdd={handleAdd} handleTextTask={handleTextTask} handleAddTask={handleAddTask}
-              tarea={tarea} list={filter} value={idLocal}   opacity={opacity} day={day} month={month} enable={enable} 
+              tarea={tarea} list={filter} value={idLocal} id={idLocal}   opacity={opacity} day={day} month={month} enable={enable} 
               value={tareaText} year={year} hour={hour} minutes={minutes} seconds={seconds} handleCancel={handleCancel} >
         </Card>
     )
