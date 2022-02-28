@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Card from '../Card'
 import { FilterContext } from '../../provider/filter.context'
 import { IdContext } from '../../provider/id.context'
+import { dateContext } from '../../provider/date.contex'
 
 
 const listFromLocal = JSON.parse(localStorage.getItem('toDoTask')) || []
@@ -35,6 +36,8 @@ function CardToDo() {
     /**Variable que actualiza el id del producto, guardo el Id en el local y lo inicializo en el contexto para que al reiniciar la pagina no se reinicie el Id a 1 */
     const [idLocal, updateIdLocal] = useContext(IdContext)
 
+    const [date,updateDate] = useContext(dateContext)
+
     /** Creo el localStorage del id */
     localStorage.setItem('id', idLocal)
 
@@ -46,6 +49,8 @@ function CardToDo() {
     let minutes = fecha.getMinutes()
     let seconds = fecha.getSeconds()
 
+    let monthUpdate = fecha.toLocaleString('default', {month:'short'})
+
     let taskCard = {
         task:tareaText,
         id:idLocal,
@@ -56,6 +61,14 @@ function CardToDo() {
         minutes:minutes,
         seconds:seconds
     }
+    
+
+   //const date = `${day} ${monthUpdate}`
+    
+    const dateSec = `${day} ${monthUpdate} at ${hour}:${minutes}:${seconds}`
+
+    console.log(date)
+   
 
 
     const handleAddTask = e => {
@@ -66,6 +79,8 @@ function CardToDo() {
             updateTareaText('') 
             updateTarea(false)
             setEnable(true)
+            updateDate(dateSec)
+            localStorage.setItem('date', dateSec) 
     }
    
     const handleTextTask = e => {
@@ -75,7 +90,7 @@ function CardToDo() {
       
     }
 
-
+   
 
 
     const handleAdd = () => {

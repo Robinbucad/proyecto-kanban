@@ -1,4 +1,4 @@
 import { createContext } from "react";
 
 
-export const FilterProgessContext = createContext()
+export const FilterProgessContext = createContext([])

@@ -7,6 +7,9 @@ import { Draggable } from 'react-beautiful-dnd'
 
 function Card(props) {
 
+    
+    
+
 
     return (
 

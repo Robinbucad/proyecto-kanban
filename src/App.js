@@ -10,57 +10,62 @@ import ProgressFilter from './provider/progress.provider'
 import Done from './components/Card-Done';
 import IdProvider from './provider/id.provider';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { useState } from 'react';
-
+import { useContext, useState } from 'react';
+import DateProvider from './provider/date.provider';
 
 const listFromLocal = JSON.parse(localStorage.getItem('toDoTask')) || []
 const listProgressFromLocal = JSON.parse(localStorage.getItem('inProgressTask')) || []
+
 
 function App() {
 
   const [toDo, updateToDo] = useState(listFromLocal)
   const [inProg, updateInProg] = useState(listProgressFromLocal)
+
   
- 
 
   const OnDragEnd = (res) => {
-      const { source, destination } = res
-      
-      if(!destination){
-        return
-      }
+    const { source, destination } = res
 
-      if(destination.droppableId === source.droppableId && destination.index === source.index ){
-        return
-      }
+    if (!destination) {
+      return
+    }
 
-      let add,
-          active = toDo,
-          inProgList = inProg;
-          
+    if (destination.droppableId === source.droppableId && destination.index === source.index) {
+      return
+    }
 
-          if(source.droppableId === 'To-do-list'){
-            add = active[source.index]
-            active.splice(source.index,1)
-          }else{
-            add = inProgList[source.index]
-            inProgList.splice(source.index,1)
-          }
+    let add,
+      active = toDo,
+      inProgList = inProg;
 
-          if(destination.droppableId === 'To-do-list'){
-            active.splice(destination.index,0,add)
-            
-          }else{
-            const z = inProgList.splice(destination.index,0,add)
-            console.log(z)
-          }
 
-          
+    if (source.droppableId === 'To-do-list') {
+      add = active[source.index]
+      active.splice(source.index, 1)
+    } else {
+      add = inProgList[source.index]
+      inProgList.splice(source.index, 1)
+    }
 
-         
+    if (destination.droppableId === 'To-do-list') {
+      active.splice(destination.index, 0, add)
+
+    } else {
+      inProgList.splice(destination.index, 0, add)
+
+    }
+
+    updateToDo(active)
+    updateInProg(inProgList)
+    console.log(active)
+    console.log(inProgList)
+
   }
 
   return (
+
+<DateProvider>
     <DragDropContext onDragEnd={OnDragEnd}>
       <ProgressFilter>
         <ProviderFilter>
@@ -76,6 +81,9 @@ function App() {
         </ProviderFilter>
       </ProgressFilter>
     </DragDropContext>
+  </DateProvider>
+
+
   );
 }
 

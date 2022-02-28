@@ -2,6 +2,7 @@
 import { useContext, useEffect } from 'react';
 import { useState } from 'react'
 import Draggable from 'react-draggable';
+import { dateContext } from '../../provider/date.contex';
 import { IdContext } from '../../provider/id.context';
 import { FilterProgessContext } from '../../provider/progress.context';
 import Card from '../Card';
@@ -33,6 +34,7 @@ function CardIndProgress() {
 
     const [filterProgres, updateProgress] = useContext(FilterProgessContext)
     const [enable, setEnable] = useState(true)
+    const [,updateDate] = useContext(dateContext)
 
 
     let fecha = new Date()
@@ -42,6 +44,9 @@ function CardIndProgress() {
     let hour = fecha.getHours()
     let minutes = fecha.getMinutes()
     let seconds = fecha.getSeconds()
+
+    let monthUpdate = fecha.toLocaleString('default', {month:'short'})
+    const dateSec = `${day} ${monthUpdate} at ${hour}:${minutes}:${seconds}`
 
     let taskCard = {
         task: tareaText,
@@ -62,6 +67,7 @@ function CardIndProgress() {
         updateTareaText('')
         updateTarea(false)
         setEnable(true)
+        updateDate(dateSec)
     }
 
 
