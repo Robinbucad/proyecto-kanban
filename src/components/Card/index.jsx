@@ -21,7 +21,7 @@ function Card(props) {
                         <header className='header__card'>
                             <div className='left__header__card'>
                                 <p>1</p>
-                                <h3>{props.title}</h3>
+                                <h3 className='title-card-header'>{props.title}</h3>
                             </div>
 
                             <button className='btn__header__add' onClick={props.handleAdd}>+</button>

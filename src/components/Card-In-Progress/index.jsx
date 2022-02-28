@@ -8,6 +8,7 @@ import { FilterProgessContext } from '../../provider/progress.context';
 import Card from '../Card';
 
 
+
 const listFromLocal = JSON.parse(localStorage.getItem('inProgressTask')) || []
 
 function CardIndProgress() {

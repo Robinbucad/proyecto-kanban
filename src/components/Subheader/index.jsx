@@ -56,8 +56,8 @@ console.log(date)
     return(
         <section className="sub-header">
             <div className='update-info-subheader'>
-                <h3>Version 1.0</h3>
-                <p>Updated on {date} </p>
+                <h3 className='version-subheader'>Version 1.0</h3>
+                <p className='date-subheader'>Updated on {date} </p>
             </div>
             <input type='text' className='input-filter' placeholder='Filter cards' onChange={filterTasks} ></input>
         </section>

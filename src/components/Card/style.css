@@ -1,20 +1,22 @@
 
 .card{
-    background-color:#f6f8fa;
-    width: 31%;
-    height: 80vh;
+    width: 30%;
+    height: 83.5vh;
     border-radius: 5px;
     border: 1px solid rgba(27,31,35,0.15);
-    box-shadow: 8px 6px 15px 1px rgb(0 0 0 / 79%);
-    overflow-y:auto;
-   
 }
+.title-card-header{
+    font-size: 16px;
+    font-weight: bold;
+}
+
 
 .dated-list {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items:flex-start;
     padding-left: 1.5rem;
+    margin-top: -15px;
 }
 
 .id-info-card{
@@ -29,6 +31,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
 }
 
 .title-div-task{
@@ -66,6 +69,9 @@
 
 .title-task{
     color:  #0366d6;
+    font-size: 13px;
+    font-weight: bold;
+   
 }
 
 .btn-tarea-cancel{
@@ -89,29 +95,33 @@
 }
 
 .left__header__card{
+
     display: flex;
-    justify-content: space-between;
-    width: 10rem;
     align-items: center;
-    justify-content: flex-start;
+    gap: 1rem;
+    justify-content: center;
 }
 
 
 .header__card {
     display: flex;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 0.8rem 1.5rem;
+    margin-bottom: -10px;
     align-items: center;
     border-radius: 5px 5px 0 0;
+    background-color: #f6f8fa;
 }
 
 .card-list{
     display: flex;
-    justify-content: center;
+    
     align-items: center;
     padding: 0.5rem;
     flex-direction: column;
     gap: 0.75rem;
+    background-color: #f6f8fa;
+    height: 100vh;
 }
 
 .tarea {
@@ -121,7 +131,6 @@
     width: 98%;
     border-radius: 4px;
     background-color: white;
-
     
 }
 .tarea:hover{
@@ -146,6 +155,7 @@
     border: solid 2px #22863a;
     height: 20px;
     width: 20px;
+    margin-top: -8px;
 }
 
 .innerPending{
