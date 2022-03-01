@@ -12,7 +12,7 @@ function SubHeader(){
     
 
 const [date] = useContext(dateContext)
-console.log(date)
+
 
    
 

@@ -20,18 +20,19 @@ import { act } from '@testing-library/react';
 
 
 
+
 function App() {
 
   const listFromLocal = JSON.parse(localStorage.getItem('toDoTask')) || []
   const listProgressFromLocal = JSON.parse(localStorage.getItem('inProgressTask')) || []
 
-  //const [toDo, updateToDo] = useState(listFromLocal)
- // const [inProg, updateInProg] = useState(listProgressFromLocal)
+  const [toDo, updateToDo] = useState(listFromLocal)
+  const [inProg, updateInProg] = useState(listProgressFromLocal)
 
   const [filter, updateFilter] = useContext(FilterContext)
   const [filterProg, updateFilterProg] = useContext(FilterProgessContext)
 
-  
+
 
   const OnDragEnd = (res) => {
     const { source, destination } = res
@@ -52,32 +53,31 @@ function App() {
     if (source.droppableId === 'To-do-list') {
       add = active[source.index]
       active.splice(source.index, 1)
-      
     } else {
       add = inProgList[source.index]
       inProgList.splice(source.index, 1)
+   
     }
 
     if (destination.droppableId === 'To-do-list') {
       active.splice(destination.index, 0, add)
-
-
+ 
     } else {
       inProgList.splice(destination.index, 0, add)
-
+   
     }
     
-   
+
     updateFilter(active)
     updateFilterProg(inProgList)
-    console.log(active)
-    console.log(inProgList)
+   
 
   }
 
   return (
 
     <DateProvider>
+      
       <DragDropContext onDragEnd={OnDragEnd}>
         <IdProvider>
           <Header></Header>
@@ -89,7 +89,9 @@ function App() {
           </main>
         </IdProvider>
       </DragDropContext>
+      
     </DateProvider>
+
 
 
   );
