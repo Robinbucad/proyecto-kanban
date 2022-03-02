@@ -1,14 +1,16 @@
 import { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import Card from '../Card'
-
+import { filterDone } from '../../provider/filterdone.context'
 
 const listFromLocal = JSON.parse(localStorage.getItem('done')) || []
 
 
 function Done() {
 
-    
+    const [featureDone, updateFeatureDone]= useContext(filterDone)
+
+
     const [tarea, updateTarea] = useState([])
 
     
@@ -49,6 +51,7 @@ function Done() {
        
             updateId(id +1)
             updateList(list => [...list, taskCard]) 
+            updateFeatureDone(list => [...list, taskCard])
             updateTareaText('')
             updateTarea(false)
             setEnable(true) 
@@ -131,7 +134,7 @@ function Done() {
                 </div>
             </div> : ''}
 
-            {list.map((e, i) => <div key={i} className='tarea'>
+            {featureDone.map((e, i) => <div key={i} className='tarea'>
                 <div className='header-task-info'>
                     <div className='title-div-task'>
                         {title === 'To do' || 'In progress' ? <div className='taskIconPending'> <div className='innerPending'></div></div> :
