@@ -32,7 +32,7 @@ function App() {
   const [filter, updateFilter] = useContext(FilterContext)
   const [filterProg, updateFilterProg] = useContext(FilterProgessContext)
 
-
+  
 
   const OnDragEnd = (res) => {
     const { source, destination } = res
@@ -53,6 +53,8 @@ function App() {
     if (source.droppableId === 'To-do-list') {
       add = active[source.index]
       active.splice(source.index, 1)
+      updateToDo(add)
+      updateInProg(add)
     } else {
       add = inProgList[source.index]
       inProgList.splice(source.index, 1)
@@ -67,10 +69,10 @@ function App() {
    
     }
     
-
+   
     updateFilter(active)
     updateFilterProg(inProgList)
-   
+
 
   }
 

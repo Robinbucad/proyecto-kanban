@@ -7,8 +7,6 @@ import { Draggable } from 'react-beautiful-dnd'
 
 function Card(props) {
 
-    
-    
 
 
     return (
@@ -20,12 +18,18 @@ function Card(props) {
                     <article className='card' ref={provided.innerRef} {...provided.droppableProps} key={i.toString()} >
                         <header className='header__card'>
                             <div className='left__header__card'>
-                                <p>1</p>
+                                <div className='div-counter'>
+                                    <p className='counter-tasks'>{props.arrCounter}</p>
+                                </div>
                                 <h3 className='title-card-header'>{props.title}</h3>
                             </div>
+                            
 
-                            <button className='btn__header__add' onClick={props.handleAdd}>+</button>
 
+                            <div>
+
+                                <button className='btn__header__add' onClick={props.handleAdd}>+</button>
+                            </div>
                         </header>
                         <section className='card-list'>
 
@@ -36,39 +40,40 @@ function Card(props) {
                                     <button className='btn-tarea-cancel' onClick={props.handleCancel}>Cancel</button>
                                 </div>
                             </div> : ''}
-                    
+
                             {props.list.map((e, i) => (
-                            
-                            <Draggable draggableId={`${e.id} + id`} key={e.id} index={i}>
 
-                                {
-                                    (provided) => (
-                                        <div key={i} className='tarea' {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                                <div className='header-task-info'>
-                                    <div className='title-div-task'>
-                                        {props.title === 'To do' || 'In progress' ? <div className='taskIconPending'> <div className='innerPending'></div></div> :
-                                            <div className='taskIconDone'><div className='innerDone'></div></div>}
+                                <Draggable draggableId={`${e.id} + id`} key={e.id} index={i}>
 
-                                        <h4 className='title-task'>{e.task}</h4>
-                                    </div>
-                                    <div>
-                                        <button className='btn__header__remove' onClick={props.handleRemove}><img className='trash__btn' src="https://img.icons8.com/metro/26/000000/trash.png" /></button>
-                                    </div>
+                                    {
+                                        (provided) => (
+                                            <div key={i} className='tarea' {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                                                <div className='header-task-info'>
+                                                    <div className='title-div-task'>
+                                                        {props.title === 'To do' || 'In progress' ? <div className='taskIconPending'> <div className='innerPending'></div></div> :
+                                                            <div className='taskIconDone'><div className='innerDone'></div></div>}
 
-                                </div>
-                                <div className='dated-list'>
-                                    <div className='id-info-card'>
-                                        <p id='id'>#{e.id}</p>
-                                        <p className='time-creation'>{`created on ${e.day}/${e.month}/${e.year} ${e.hour}:${e.minutes}:${e.seconds}`}</p>
-                                    </div>
-                                </div>
-                                
-                            </div> 
-                                    )
-                                }
+                                                        <h4 className='title-task'>{e.task}</h4>
+                                                    </div>
+                                                    <div>
+                                                        <button className='btn__header__remove' value={e.id} onClick={props.handleRemove}> - </button>
+                                                    </div>
+                                                    
+                                            
+                                                </div>
+                                                <div className='dated-list'>
+                                                    <div className='id-info-card'>
+                                                        <p id='id'>#{e.id}</p>
+                                                        <p className='time-creation'>{`created on ${e.day}/${e.month}/${e.year} ${e.hour}:${e.minutes}:${e.seconds}`}</p>
+                                                    </div>
+                                                </div>
 
-                            
-                            </Draggable>
+                                            </div>
+                                        )
+                                    }
+
+
+                                </Draggable>
                             ))}
 
 

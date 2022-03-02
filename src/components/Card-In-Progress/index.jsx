@@ -100,11 +100,22 @@ function CardIndProgress() {
         updateTarea(false)
     }
 
+    const handleRemoveOne = (tId) => {
+     
+            const val = tId.target.value
+            const valNum = Number(val)
+ 
+            const remOne = list.filter( e => e.id !== valNum)
+            updateProgress(remOne)
+            updateList(remOne)
+            
+    }
+
 
     return (
 
         <Card dragTable='inProg-list'  indexDrag={idLocal} cardId='cardProgress' title='In progress' handleAdd={handleAdd} handleTextTask={handleTextTask} handleAddTask={handleAddTask}
-            tarea={tarea} list={filterProgres} id={idLocal} opacity={opacity} day={day} month={month}  enable={enable}
+            tarea={tarea} list={filterProgres} id={idLocal} opacity={opacity} day={day} month={month}  enable={enable} handleRemove={handleRemoveOne} arrCounter={list.length}
             value={tareaText} year={year} hour={hour} minutes={minutes} seconds={seconds} handleCancel={handleCancel}>
         </Card>
 

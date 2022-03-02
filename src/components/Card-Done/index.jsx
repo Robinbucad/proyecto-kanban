@@ -82,12 +82,11 @@ function Done() {
     }
 
 
+
     const handleRemoveOne = e => {
-        const removeArrOne = list.filter( d => d.id !== e.target.value)
-        let counter = 0
-        removeArrOne.splice(counter, 1)
-        updateList(removeArrOne)
+        const removeArrOne = list.filter( d => d.id !== e.target.value)      
     }
+    
 
     // const key_id= id
     // const handleRemoveItem = JSON.parse(localStorage.getItem("key_name")) || [];           
@@ -141,7 +140,7 @@ function Done() {
                         <h4 className='title-task'>{e.task}</h4>
                     </div>
                     <div>
-                        <button className='btn__header__remove' onClick={handleRemoveOne}><img className='trash__btn' src="https://img.icons8.com/metro/26/000000/trash.png" /></button>
+                        <button className='btn__header__remove'  onClick={handleRemoveOne}><img className='trash__btn' src="https://img.icons8.com/metro/26/000000/trash.png" /></button>
                     </div>
 
                 </div>
