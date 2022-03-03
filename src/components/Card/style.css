@@ -1,21 +1,61 @@
 
 .card{
-    background-color:#f6f8fa;
-    width: 32.5%;
-    height: 80vh;
+    width: 30%;
+    height: 83vh;
     border-radius: 5px;
     border: 1px solid rgba(27,31,35,0.15);
+}
+.title-card-header{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.div-counter{
+    background-color:	#efebe9;
+    height: 25px;
+    width: 25px;
+    display: flex;
+    border-radius: 100%;
+    justify-content: center;
 }
 
 .dated-list {
     display: flex;
- 
+    justify-content: space-between;
+    align-items:flex-start;
+    padding-left: 1.5rem;
+    margin-top: -15px;
+}
+
+.id-info-card{
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -10px;
+}
+
+.header-task-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.title-div-task{
+    display: flex;
+    gap:0.5rem;
+    align-items: center;
 }
 
 #id{
     font-size: 12px;
 }
 
+.custom{
+    width: 49% ;
+    padding: 0.5rem;
+}
 
 .btn__header__add{
     background:none;
@@ -34,18 +74,12 @@
     
 }
 
-.btn-tarea-add{
-    padding: 0.5rem;
-    width: 49%;
-    border-radius: 5px;
-    background-color:#2ea44f;
-    border: none;
-    color: white;
-    cursor: pointer;
-}
 
 .title-task{
     color:  #0366d6;
+    font-size: 13px;
+    font-weight: bold;
+   
 }
 
 .btn-tarea-cancel{
@@ -55,6 +89,7 @@
     cursor: pointer;
     background-color:#fafbfc;
     border-color: rgba(27,31,35,0.15);
+    
 }
 
 .btn-divs{
@@ -67,30 +102,38 @@
     border-radius: 5px;
 }
 
+.counter-tasks{
+    font-size: 15px;
+    font-weight: bold;
+}
+
 .left__header__card{
+    
     display: flex;
-    justify-content: space-between;
-    width: 7rem;
-    align-items: center;
-    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    justify-content: center;
 }
 
 
 .header__card {
     display: flex;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 0.8rem 1.5rem;
     align-items: center;
     border-radius: 5px 5px 0 0;
+    background-color: #f6f8fa;
 }
 
 .card-list{
     display: flex;
-    justify-content: center;
+    overflow: auto;
     align-items: center;
     padding: 0.5rem;
     flex-direction: column;
     gap: 0.75rem;
+    background-color: #f6f8fa;
+    height: 100vh;
 }
 
 .tarea {
@@ -99,10 +142,75 @@
     width: 98%;
     border-radius: 4px;
     background-color: white;
+    height: 6rem;
+}
+.tarea:hover{
+    transform: translateX(-5px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+
 }
 
 .time-creation{
     color:gray;
-    font-size: 10px;
+    font-size: 13px;
     font-weight: lighter;
+}
+
+.taskIconPending{
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    border: solid 2px #22863a;
+    height: 20px;
+    width: 20px;
+    margin-top: -8px;
+}
+
+.innerPending{
+    border-radius: 50%;
+    background-color: #22863a;
+    height: 5px;
+    width: 5px;
+    margin-top: 5px;
+}
+
+.taskIconDone{
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    border: solid 2px #cb2431;
+    height: 20px;
+    width: 20px;
+}
+
+.innerDone{
+    border-radius: 50%;
+    background-color: #cb2431;
+    height: 5px;
+    width: 5px;
+    margin-top: 5px;
+}
+.btn__header__clearAll{
+    background:none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    color:  gray;
+
+
+}
+.btn__header__remove{
+    background:none;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+
+}
+.trash__btn{
+    height: 15px;
+    width: 16px;
+    margin-left: 58px;
+    
 }

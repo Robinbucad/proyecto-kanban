@@ -1,59 +1,52 @@
 import { useContext, useEffect, useState } from 'react'
+import { dateContext } from '../../provider/date.contex'
 import { FilterContext} from '../../provider/filter.context'
 import { FilterProgessContext } from '../../provider/progress.context'
+import { filterDone } from '../../provider/filterdone.context'
+
 
 import './style.css'
 
 
+
 function SubHeader(){
 /**Esto lo metere en una funcion para que actualize la fecha cuando actualizo una card */
-    let fecha = new Date()
-    let month = fecha.toLocaleString('default', {month:'short'})
-    let day = fecha.getDate()
-/*
-    const [filterToDoTask, updateFilterToDoTask] = useState([])
+    
 
-    const listFromLocal = JSON.parse(localStorage.getItem('toDoTask'))
-    const listFromLocalProgess = JSON.parse(localStorage.getItem('inProgressTask'))
-
-    localStorage.setItem('filtered', JSON.stringify(filterToDoTask) )
+const [date] = useContext(dateContext)
 
 
-    const filterTasks = e => {
-        const filter = listFromLocal.filter(p => p.task.toLowerCase().includes(e.target.value))
-        const filter2 = listFromLocalProgess.filter(p => p.task.toLowerCase().includes(e.target.value))
-        filter.push(filter2)
-        updateFilterToDoTask(filter)  
-    }
-*/
     const [filter, updateFilter] = useContext(FilterContext)
     const [filterProgres,updateProgress] = useContext(FilterProgessContext)
+    const [filterDoneValue, updateDoneValue]= useContext(filterDone)
    
 
     const listFromLocal = JSON.parse(localStorage.getItem('toDoTask'))
     const listFromLocalProgress = JSON.parse(localStorage.getItem('inProgressTask'))
- 
+    const listFromLocalDone = JSON.parse(localStorage.getItem('done'))
+    
     
 
     const filterTasks = e => {
         const filter = listFromLocal.filter(p => p.task.toLowerCase().includes(e.target.value))
         const filterProgress = listFromLocalProgress.filter( p => p.task.toLowerCase().includes(e.target.value))
-        
+        const filterDone = listFromLocalDone.filter(p=> p.task.toLowerCase().includes(e.target.value))
         updateFilter(filter)
         updateProgress(filterProgress)
-        
+        updateDoneValue(filterDone)
     }
-
+    console.log(filterDoneValue)
    
     
   
     return(
         <section className="sub-header">
             <div className='update-info-subheader'>
-                <h3>Version 1.0</h3>
-                <p>Updated on {day} {month}</p>
+                <h3 className='version-subheader'>Version 1.0</h3>
+                <p className='date-subheader'>Updated on {date} </p>
+                
             </div>
-            <input type='text' className='input-filter' placeholder='Filter cards' onChange={filterTasks} ></input>
+            <input type='text' className='input-filter' placeholder='Search task...' onChange={filterTasks} ></input>
         </section>
     )
 
