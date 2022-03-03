@@ -72,7 +72,7 @@ function CardToDo() {
 
 
     const handleAddTask = e => {
-
+       
         updateIdLocal(idLocal + 1)
         updateList(list => [...list, taskCard])
         updateFilter(list => [...list, taskCard])
@@ -84,10 +84,10 @@ function CardToDo() {
     }
 
     const handleTextTask = e => {
+        console.log(e.target.value)
         updateTareaText(e.target.value)
         updateOpacity('newOpacity')
         setEnable(false)
-
     }
 
 
@@ -107,21 +107,17 @@ function CardToDo() {
         updateTarea(false)
     }
 
-    const handleRemoveOne = (tId) => {
-        // val es el value del boton, LO TRAE COMO STRING Y HAY QUE PASARLO A NUMBER PARA PODER IGUALAR EL ID DEL OBJETO Y EL VALUE DEL BOTON QUE TIENE CADA OBJETO
-            const val = tId.target.value
-            const valNum = Number(val)
+    const handleRemoveOne = id => {
+        const remOne = list.filter( e => e.id !== id)
+        updateFilter(remOne)
+        updateList(remOne)
  
-            const remOne = list.filter( e => e.id !== valNum)
-            updateFilter(remOne)
-            updateList(remOne)
-            console.log(tId.target)
     }
 
 
     return (
         <Card dragTable='To-do-list' indexDrag={idLocal} cardId='cardToDo' title='To do' handleAdd={handleAdd} handleTextTask={handleTextTask} handleAddTask={handleAddTask}
-            tarea={tarea} list={filter} id={idLocal} opacity={opacity} day={day} month={month} enable={enable} handleRemove={handleRemoveOne} arrCounter={list.length}
+            tarea={tarea} list={filter} id={idLocal} opacity={opacity} day={day} month={month} enable={enable} handleRemove={ handleRemoveOne} arrCounter={list.length}
             value={tareaText} year={year} hour={hour} minutes={minutes} seconds={seconds} handleCancel={handleCancel} >
         </Card>
     )

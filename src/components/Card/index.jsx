@@ -56,7 +56,7 @@ function Card(props) {
                                                         <h4 className='title-task'>{e.task}</h4>
                                                     </div>
                                                     <div>
-                                                        <button className='btn__header__remove' value={e.id} onClick={props.handleRemove}> - </button>
+                                                        <button className='btn__header__remove' value={e.id} onClick={() => props.handleRemove(e.id)}> <img className='trash__btn' src="https://img.icons8.com/metro/26/000000/trash.png" /> </button>
                                                     </div>
                                                     
                                             

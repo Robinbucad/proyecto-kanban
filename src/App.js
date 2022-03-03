@@ -15,6 +15,7 @@ import DateProvider from './provider/date.provider';
 import { FilterContext } from './provider/filter.context';
 import { FilterProgessContext } from './provider/progress.context';
 import { act } from '@testing-library/react';
+import { filterDone } from './provider/filterdone.context';
 
 
 
@@ -24,19 +25,26 @@ import { act } from '@testing-library/react';
 
 function App() {
 
-  const listFromLocal = JSON.parse(localStorage.getItem('toDoTask')) || []
+  const listToDo = JSON.parse(localStorage.getItem('toDoTask')) || []
   const listProgressFromLocal = JSON.parse(localStorage.getItem('inProgressTask')) || []
+  const listDoneLocal = JSON.parse(localStorage.getItem('done'))
 
-  const [toDo, updateToDo] = useState(listFromLocal)
+
+
+  const [toDo, updateToDo] = useState(listToDo)
   const [inProg, updateInProg] = useState(listProgressFromLocal)
 
   const [filter, updateFilter] = useContext(FilterContext)
   const [filterProg, updateFilterProg] = useContext(FilterProgessContext)
+  const [filterDoneCard, updateFilterDoner] = useContext(filterDone)
 
+  
   
 
   const OnDragEnd = (res) => {
     const { source, destination } = res
+  
+ 
 
     if (!destination) {
       return
@@ -48,33 +56,44 @@ function App() {
 
     let add,
       active = filter,
-      inProgList = filterProg;
-
+      inProgList = filterProg,
+      doneList = filterDoneCard
+     
 
     if (source.droppableId === 'To-do-list') {
-      add = active[source.index]
-      active.splice(source.index, 1)
-      updateToDo(add)
-      updateInProg(add)
-    } else {
+      add = active[source.index] 
+      active.splice(source.index, 1) 
+
+
+    } else if(source.droppableId === 'inProg-list') {
       add = inProgList[source.index]
       inProgList.splice(source.index, 1)
-   
+
+     
+    }else if(source.droppableId === 'card-doneDrag'){
+      add = doneList[source.index] 
+      doneList.splice(source.index, 1) 
     }
 
     if (destination.droppableId === 'To-do-list') {
       active.splice(destination.index, 0, add)
- 
-    } else {
+
+     
+
+    } else if(destination.droppableId === 'inProg-list'){
       inProgList.splice(destination.index, 0, add)
-   
+
+
+    }else if(destination.droppableId === 'card-doneDrag'){
+      doneList.splice(destination.index,0,add)
     }
     
    
     updateFilter(active)
     updateFilterProg(inProgList)
-
-
+    updateInProg(inProgList)
+    updateToDo(active)
+    
   }
 
   return (

@@ -1,0 +1,25 @@
+
+
+.taskIconDone{
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    border: solid 2px red;
+    height: 30px;
+    width: 30px;
+    margin-top: -8px;
+
+}
+
+.div-btns-done{
+    justify-content: space-between;
+    width: 8rem;
+    display: flex;
+    align-items: center;
+
+}
+
+.v{
+    color: red;
+    font-weight: bold;
+}

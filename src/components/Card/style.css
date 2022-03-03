@@ -11,7 +11,7 @@
 }
 
 .div-counter{
-    background-color:	#d3d3d3;
+    background-color:	#efebe9;
     height: 25px;
     width: 25px;
     display: flex;
@@ -142,7 +142,7 @@
     width: 98%;
     border-radius: 4px;
     background-color: white;
-    
+    height: 6rem;
 }
 .tarea:hover{
     transform: translateX(-5px);
@@ -195,9 +195,9 @@
 .btn__header__clearAll{
     background:none;
     border: none;
-    font-size: 25px;
+    font-size: 14px;
     cursor: pointer;
-    font-size: small;
+    color:  gray;
 
 
 }

@@ -16,24 +16,6 @@ function SubHeader(){
 const [date] = useContext(dateContext)
 
 
-   
-
-/*
-    const [filterToDoTask, updateFilterToDoTask] = useState([])
-
-    const listFromLocal = JSON.parse(localStorage.getItem('toDoTask'))
-    const listFromLocalProgess = JSON.parse(localStorage.getItem('inProgressTask'))
-
-    localStorage.setItem('filtered', JSON.stringify(filterToDoTask) )
-
-
-    const filterTasks = e => {
-        const filter = listFromLocal.filter(p => p.task.toLowerCase().includes(e.target.value))
-        const filter2 = listFromLocalProgess.filter(p => p.task.toLowerCase().includes(e.target.value))
-        filter.push(filter2)
-        updateFilterToDoTask(filter)  
-    }
-*/
     const [filter, updateFilter] = useContext(FilterContext)
     const [filterProgres,updateProgress] = useContext(FilterProgessContext)
     const [filterDoneValue, updateDoneValue]= useContext(filterDone)
@@ -62,8 +44,9 @@ const [date] = useContext(dateContext)
             <div className='update-info-subheader'>
                 <h3 className='version-subheader'>Version 1.0</h3>
                 <p className='date-subheader'>Updated on {date} </p>
+                
             </div>
-            <input type='text' className='input-filter' placeholder='Filter cards' onChange={filterTasks} ></input>
+            <input type='text' className='input-filter' placeholder='Search task...' onChange={filterTasks} ></input>
         </section>
     )
 

@@ -100,15 +100,11 @@ function CardIndProgress() {
         updateTarea(false)
     }
 
-    const handleRemoveOne = (tId) => {
-     
-            const val = tId.target.value
-            const valNum = Number(val)
+    const handleRemoveOne = id => {
+        const remOne = list.filter( e => e.id !== id)
+        updateProgress(remOne)
+        updateList(remOne)
  
-            const remOne = list.filter( e => e.id !== valNum)
-            updateProgress(remOne)
-            updateList(remOne)
-            
     }
 
 
