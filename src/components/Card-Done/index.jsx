@@ -103,17 +103,6 @@ function Done() {
     }
 
 
-    // const key_id= id
-    // const handleRemoveItem = JSON.parse(localStorage.getItem("key_name")) || [];           
-    //         $.each(item_detail, function(index, obj){
-    //             if (key_id == data('key')) {
-    //                 item_detail.splice(index,1);
-    //                 localStorage["key_name"] = JSON.stringify(item_detail);
-    //                 return false;
-    //             }
-    //         });
-
-
     const handleCancel = () => {
         updateTarea(false)
     }
